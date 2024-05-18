@@ -87,3 +87,9 @@ This shortcut is not recommended on real networks
 R1(config)# eigrp 100 
 R1(config-router)# network 0.0.0.0 255.255.255.255
 ```
+
+## Calculate eigrp metric
+
+```
+metric = bandwidth of the slowest link + the delay of all links
+```
