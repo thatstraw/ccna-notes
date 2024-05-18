@@ -1,3 +1,20 @@
+
+
+## Routing Protocols
+
+## IGP - Interior Gateway Protocol
+    - Distace Vector
+        Routing Information Protocol (RIP)
+        Enhanced Interior Gateway Routing Protocol (EIGRP)
+
+    - Link State
+        Open Shortest Path First (OSPF)
+        Intermediate System to Intermediate System (IS-IS)
+
+## EGP - Exterior Gateway Protocol
+    - Path Vector
+        Border Gateway Protocol(BGP)
+
 ## Displaying avaible routes
 
 ```
