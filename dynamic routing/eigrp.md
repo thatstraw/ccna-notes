@@ -1,20 +1,20 @@
-# Configuring RIP
-RIPv1 Broadcast messages
-RIPv2 send multicast messages via 224.0.0.9
+# Enhanced Interior Routing Protocol
+EIGRP send multicast messages via 224.0.0.10
 
-
-## Configuring RIPv2
+## Configuring EIGRP
 ```
-R1(config)# router rip
 
-# config the router to use RIPv2
-R1(config-router)# version 2 
+# The AS (Autonomous System) number must match between the routers, or they will form an adnacency and share routing information
+R1(config)# router eigrp 1
 
 # disable classful
 R1(config-router)# no auto summary
 
 # configure interfaces to activate  rip on
 R1(config-router)# network 10.0.0.0
+
+# You can also configure the actual network followed by bitwise mask
+R1(config-router)# network 172.16.1.0 0.0.0.15
 
 # Configure an interface to be passive mode
 R1(config-router)#
@@ -34,7 +34,11 @@ R1(config-router)# maximum-paths 12
 R1# show ip protocols
 ```
 
-If you want rip routes to prefered over other routes learned from other routing protocols, change the rip distance:
+If you want eigrp routes to prefered over other routes learned from other routing protocols, change the rip distance:
 ```
 R1(config-router)# distance 24
 ```
+
+# Wildcard mask
+
+- EIGRP uses wildcard mask instaed of a regular subnet mask
