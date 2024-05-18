@@ -64,7 +64,7 @@ R1(config-router)# eigrp router-id ?
 ```
 
 ## Unequal-Cost Load-Balancing
-
+R1(config-router)# variance ?
 
 
 ## Configuring Loopback interfaces
