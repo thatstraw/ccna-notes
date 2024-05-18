@@ -14,6 +14,8 @@ R1(config-router)# no auto summary
 R1(config-router)# network 10.0.0.0
 
 # You can also configure the actual network followed by bitwise mask
+
+# <network address> and the inverted network prefix
 R1(config-router)# network 172.16.1.0 0.0.0.15
 
 # Configure an interface to be passive mode
@@ -57,4 +59,29 @@ R1(config-router)# distance 24
 ```
 R1(config-router)# eigrp router-id ?
 
+```
+
+## Unequal-Cost Load-Balancing
+
+
+
+## Configuring Loopback interfaces
+
+```
+
+R1(config) interface loopback <loopback-number>
+
+R1(config-if) ip address 1.1.1.1 255.255.255.255
+
+# A loopback interface is always up up unless you manually shutdown it. 
+
+```
+
+
+## Another way to configure eigrp on all the interfaces
+This shortcut is not recommended on real networks
+
+```
+R1(config)# eigrp 100 
+R1(config-router)# network 0.0.0.0 255.255.255.255
 ```
