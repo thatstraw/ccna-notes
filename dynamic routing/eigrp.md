@@ -42,3 +42,19 @@ R1(config-router)# distance 24
 # Wildcard mask
 
 - EIGRP uses wildcard mask instaed of a regular subnet mask
+- A wildcard mask is basically an inverted subnet mask.
+- All 1s in the subnet mask are 0 in the equivalent wildcard mask. All 0s in the subnet are 1 in the equivalent wildcard mask
+
+
+
+## EiGRP Router ID order of priority
+1. Manual Configuration
+2. Highest IP address on a loopback interface
+3. Highest IP address on a physical interface
+
+
+## Configuring router ID
+```
+R1(config-router)# eigrp router-id ?
+
+```
