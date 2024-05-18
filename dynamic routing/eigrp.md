@@ -18,8 +18,10 @@ R1(config-router)# network 10.0.0.0
 # <network address> and the inverted network prefix
 R1(config-router)# network 172.16.1.0 0.0.0.15
 
+# Advertise loopback address interfaces
+R1(config-router)# network 1.1.1.1 0.0.0.0
+
 # Configure an interface to be passive mode
-R1(config-router)#
 
 # Stop the router from sending rip addvertisement out of the interface
 R1(config-router)# passive-interface g0/0
