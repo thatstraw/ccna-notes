@@ -47,11 +47,13 @@ R1# clear ip ospf process
 
 R1(config)# do show ip protocols
 
+R1(config-router)#  maximum-paths?
+R1(config-router)# distance ?
 
 ```
 
-> The network command requires you to specify the area
-The command tells ospf to..
-- look for any interfaces with an IP address contained in the range specified in the network command.
-- Activate ospf on the interface in the specified area
-- Ther router will then ty to become ospf neighbors with other ospf-activated neighbor routers.
+> The network command requires you to specify the area  
+    The command tells ospf to..
+    - look for any interfaces with an IP address contained in the range specified in the network command.
+    - Activate ospf on the interface in the specified area
+    - Ther router will then ty to become ospf neighbors with other ospf-activated neighbor routers.
