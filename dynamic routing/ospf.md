@@ -111,7 +111,7 @@ R1(config-if)# ip ospf cost ?
 | 2    | Database Description (DBD)   | Summary of the LSDB of the router. Used to check if the LSDB of each router is the same                                                  |
 | 3    | Link-State Request (LSR)     | Requests specific LSAs from neighbor                                                                                                     |
 | 4    | Link-State Update (LSU)      | Sends specific LSAs to the neighbor                                                                                                      |
-| 5    | Link-State Acknowledgement LSAcks   | Used to acknowledge that the router received a message                                                                                   |
+| 5    | Link-State Acknowledgement (LSAcks)   | Used to acknowledge that the router received a message                                                                                   |
 
 ## More ospf configuration
 ```
