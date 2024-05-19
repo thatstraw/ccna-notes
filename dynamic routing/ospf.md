@@ -105,18 +105,13 @@ R1(config-if)# ip ospf cost ?
 - Full - In full state, the routers have a full ospf adjacency and identical LSDBs
 
 ## OSPF Messages summary
-Type            Name                            Purpose
-1               Hello                           Neighbour discovery and maintenance
-
-2               Database Description (DBD)      Summary of the LSDB of the router
-                                                Use to check if the LSDB of each router is the same
-
-3               Link-State Request (LSR)        Requests specific LSAs from neighbor
-
-4               Link-State Update (LSU)         Sends specific LSAs to the neighbor
-
-5               Link-State Acknowledgement      (LSAck) Used to acknowledge that the router                                         received a message
-
+| Type | Name                          | Purpose                                                                                                                                  |
+|------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | Hello                        | Neighbour discovery and maintenance                                                                                                      |
+| 2    | Database Description (DBD)   | Summary of the LSDB of the router. Used to check if the LSDB of each router is the same                                                  |
+| 3    | Link-State Request (LSR)     | Requests specific LSAs from neighbor                                                                                                     |
+| 4    | Link-State Update (LSU)      | Sends specific LSAs to the neighbor                                                                                                      |
+| 5    | Link-State Acknowledgement LSAcks   | Used to acknowledge that the router received a message                                                                                   |
 
 ## More ospf configuration
 ```
@@ -147,5 +142,9 @@ Enabled by default on PPP (Point-to-Point Protocol) and HDLC (High-Level Data Li
 3. Non-broadcast
 - enabled by default on Frame Relay and X.25 interfaces
 
-# DR/BDR election order of priority
-1 - Highest OSPF interface priority
+## DR/BDR election order of priority
+
+1 - Router with  b Highest OSPF interface priority
+2 - Highest OSPF Router ID
+
+First place becomes the DR for the subnet and second place becomes the BDR
