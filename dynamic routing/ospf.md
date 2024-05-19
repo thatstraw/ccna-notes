@@ -127,6 +127,10 @@ R1(config-router)# passive-interface default
 # Removing interfaces from passive mode
 R1(config-router)# no passive-interface g0/0
 
+
+# Change OSPF inteface priority
+R2(config-if)# ip ospf priority ?
+
 ```
 
 ## Ospf network types
@@ -144,7 +148,18 @@ Enabled by default on PPP (Point-to-Point Protocol) and HDLC (High-Level Data Li
 
 ## DR/BDR election order of priority
 
-1 - Router with  b Highest OSPF interface priority
-2 - Highest OSPF Router ID
+
+- 1 - Router with Highest OSPF interface priority
+```
+# Change OSPF inteface priority
+R2(config-if)# ip ospf priority ?
+```
+If you set the ospf interface priority to 0, the router CANNOT be the DR/BDR for the subnet no matter what.
+
+- 2 - Highest OSPF Router ID
+
 
 First place becomes the DR for the subnet and second place becomes the BDR
+
+> All interfaces without ospf neighbors automaticaly becomes DR
+The default OSPF interface priority is 1 on all interfaces. So router with the highest router ID will become the DR of the segment.
