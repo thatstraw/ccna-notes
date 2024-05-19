@@ -57,3 +57,95 @@ R1(config-router)# distance ?
     - look for any interfaces with an IP address contained in the range specified in the network command.
     - Activate ospf on the interface in the specified area
     - Ther router will then ty to become ospf neighbors with other ospf-activated neighbor routers.
+
+
+## OSPF Specific commands
+```
+# View ospf databases
+R1# show ip ospf database
+
+# show ospf neihbours
+R1# show ip ospf neighbours
+
+# current ospf settings on the interfaces
+R1# show ip ospf interface
+
+
+# Changing the reference bandwidth
+R1(config-router)# auto-cost reference-bandwidth <megabits-per-second>
+
+# Note: you should configure a reference bandwidth greater than the fastest links in your network (to allow for future upgrades)
+
+
+# Manually configuring ospf cost of an interface
+R1(config-if)# ip ospf cost ?
+```
+
+## Formulae to calculate ospf cost
+> reference bandwidth / interface bandwidth
+
+## OSPF Neighbors
+
+- When OSPF is activated on an interface, the router starts sending ospf hello messages out the interface at regular interfals (determined by the hello timer). These are use to introduce the router to potential ospf enighbors.
+- The default hello timer is 10 seconds on an ethernet connection.
+- Hello messages are multicast to 224.0.0.5 (multicast address for all ospf routers)
+- OSPF messages are encapsulated in an IP header, with the value of 89 in the protocol field.
+
+
+##  ospf neighbor state
+- The first state is the down state, the router doesn't know about any ospf neighbors yet, so the current neighbor state is Down
+- Init state - Hello packet was received, but router-2 own router ID is not in the hello packet
+- 2-way state - R2 will send a hello packet containing the RID of both routers. R1 will insert R2 into its ospf neigbor table in the 2 way state. R1 will send another hello message, this time containing R2's RID.
+- Exstart - The router with the higher RID will become the Master and initiate an exchange. The router with lower RID will bocome the Slave. To decide the Master and Slave, they exchange DBD (Database Description) packets.
+- Exchange state - In this state, the routers exchange DBDs which contain a list of the LSAs in their LSBD.
+- Loading - In the loading state, routers send Link State Request (LSR) messages to request that neighbors send them any LSAs they don't have. (Used to request missing LSAs).
+    - LSAs are sent in Link State Update (LSU) messages
+    - The routers send LSAck messages to acknowledge that they recieved the LSAs.
+
+- Full - In full state, the routers have a full ospf adjacency and identical LSDBs
+
+## OSPF Messages summary
+Type            Name                            Purpose
+1               Hello                           Neighbour discovery and maintenance
+
+2               Database Description (DBD)      Summary of the LSDB of the router
+                                                Use to check if the LSDB of each router is the same
+
+3               Link-State Request (LSR)        Requests specific LSAs from neighbor
+
+4               Link-State Update (LSU)         Sends specific LSAs to the neighbor
+
+5               Link-State Acknowledgement      (LSAck) Used to acknowledge that the router                                         received a message
+
+
+## More ospf configuration
+```
+# directly enabling ospf on an interface
+# <process id> <area>
+R1(config-if)# ip ospf 1 area 0
+
+
+# Configure all interfaces as OSPF passive interfaces
+R1(config)# router ospf 1
+R1(config-router)# passive-interface default
+
+# Removing interfaces from passive mode
+R1(config-router)# no passive-interface g0/0
+
+```
+
+## Ospf network types
+The ospf network type refers to the type of connection between ospf neighbors (Ethernet, etc)
+
+There are three main ospf network types:
+1. Broadcast
+Enabled by default on Ethernet and FDDI (Fiber Distributed Data Interfaces) interfaces
+
+2.  Point-to-Point
+Enabled by default on PPP (Point-to-Point Protocol) and HDLC (High-Level Data Link Control) interfaces
+
+3. Non-broadcast
+- enabled by default on Frame Relay and X.25 interfaces
+
+# DR/BDR election order of priority
+1 - Highest OSPF interface priority
