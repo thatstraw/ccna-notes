@@ -163,3 +163,8 @@ First place becomes the DR for the subnet and second place becomes the BDR
 
 > All interfaces without ospf neighbors automaticaly becomes DR
 The default OSPF interface priority is 1 on all interfaces. So router with the highest router ID will become the DR of the segment.
+
+- In the broadcast network type, routers will only form a full ospf adjacency with the DR and BDR of the segment.
+- Therefore, routers only exchange LSAS with DR and BDR. DROthers will not exchange LSAs with each other.
+- All routers will still have the same LSDB, but this reduces the amount of LSAs flooding the network.
+- When routers want to send messages to the DR/BDR they use multicast address 224.0.0.6
