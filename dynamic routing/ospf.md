@@ -83,6 +83,9 @@ R1(config-if)# ip ospf cost ?
 
 # Configure ospf network type on an interface
 R1(config-if)# ip ospf network ?
+
+# Configure ospf directly on an interface
+R1(config-if)# ip ospf 1 area 0
 ```
 
 ## Formulae to calculate ospf cost
