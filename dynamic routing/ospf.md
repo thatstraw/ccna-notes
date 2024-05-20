@@ -79,6 +79,10 @@ R1(config-router)# auto-cost reference-bandwidth <megabits-per-second>
 
 # Manually configuring ospf cost of an interface
 R1(config-if)# ip ospf cost ?
+
+
+# Configure ospf network type on an interface
+R1(config-if)# ip ospf network ?
 ```
 
 ## Formulae to calculate ospf cost
@@ -170,3 +174,43 @@ The default OSPF interface priority is 1 on all interfaces. So router with the h
 - When routers want to send messages to the DR/BDR they use multicast address 224.0.0.6.
 
 - The DR and BDR will form a FULL adjacency will ALL routers in the subnet. DROthers will form a FULL adjacency only with the DR/BDR
+
+## OSPF Point-to-Point Network
+
+- Enabled on serial interfaces using the PPP or HDLC encapsulations by default
+- A DR and BDR are not elected.
+- These encapsulations are used for point to point connections.
+- Therefore there is no point in electing a DR and BDR
+- The two routers will form a Full adjacency with each other.
+
+### Serial Connections
+- One side of a serial connection functions as DCE (Data Communication Equipment)
+- The other side functions as DTE (Data Terminal Equipment)
+- The DCE side needs to specify the clock rate (speed) of the connection
+
+```
+# configuring serial interface speed
+R1(config)# int s2/0
+R1(config-if)# clock rate <bs>
+
+#The default encapsulation on a serial interface is HDLC
+# configure an interface to use another encapsulation for serial connection
+R1(config-if)# encapsulation ppp
+
+# Important: If you change the encapsulation, it must match on both ends or the interface will go down.
+```
+
+*How to check which side is DCE and which side is DTE*
+```
+R1# show controllers s2/0
+```
+
+## OSPF Neighbor Requirements
+- The area number must match between the two routers
+- The interface must be in the same subnet to become neighbors
+- The ospf process must not be shutdown
+    ```
+    # in the opsf configuration you can shutdown the ospf process
+    R2(config)# router ospf 1
+    R2(config-router)# shutdown
+    ```
