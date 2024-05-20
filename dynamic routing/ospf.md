@@ -214,3 +214,33 @@ R1# show controllers s2/0
     R2(config)# router ospf 1
     R2(config-router)# shutdown
     ```
+- The ospf router IDs must be unique
+- The Hello and Dead timers must match
+    ```
+    # hello and dead timers can be configured on the interface
+    R2(config-if)# ip ospf hello-interval ?
+    R2(config-if)# ip ospf dead-interval ?
+
+    # Here is how you can return the timers to their default values
+    R2(config-if)# no ip ospf hello-interval
+    R2(config-if)# no ip ospf dead-interval
+    ```
+- Authentication settings must match
+    ```
+    # ospf password can be configured on an interface too
+    R2(config-if)# ip ospf authentication-key cisco
+    R2(config-if)# ip ospf authentication
+
+    # removing the authentication
+    R2(config-if)# no ip ospf authentication-key cisco
+    R2(config-if)# no ip ospf authentication
+    ```
+- IP MTU settings must match
+    > Important: even if the IP MTU settings don't match the routers can become neighbors
+    but OSPF doesn't operate properly
+
+    ```
+    # change ip mtu
+    R2(config-if)# ip mtu ?
+    
+    ```
