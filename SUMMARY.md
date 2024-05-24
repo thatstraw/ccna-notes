@@ -9,7 +9,7 @@
 * [dynamic routing](dynamic-routing/README.md)
   * [routing](dynamic-routing/routing.md)
   * [Configuring RIP](dynamic-routing/rip.md)
-  * [eigrp](<dynamic routing/eigrp.md>)
+  * [eigrp protocol](<dynamic routing/eigrp.md>)
   * [Open Shortest Path First](dynamic-routing/ospf.md)
 * [ipv6](ipv6/README.md)
   * [ipv6-cheasheet](ipv6/ipv6-cheasheet.md)
