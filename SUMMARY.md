@@ -8,7 +8,6 @@
 * [vlans](vlans.md)
 * [dynamic routing](dynamic-routing/README.md)
   * [routing](dynamic-routing/routing.md)
-  * [dynamic routing](dynamic-routing/dynamic-routing.md)
   * [Configuring RIP](dynamic-routing/rip.md)
   * [eigrp](<dynamic routing/eigrp.md>)
   * [Open Shortest Path First](dynamic-routing/ospf.md)
