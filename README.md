@@ -1,1 +1,1 @@
-This are my ccna notes, not yet perfect.
+These are my ccna notes, not yet perfect.
