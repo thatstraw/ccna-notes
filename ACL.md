@@ -108,8 +108,87 @@ R1# show running-config | section access-list
 
 ```
 
+You can also configure numbered ACL like you are configuring named ACLs for example:
+```
+R1(config)# ip acess-list standard <number>
+```
+These has several advantages.
+
+### Advantages of named ACL config mode
+- You can easily delete individual entries in the ACL with "no entry-number" command in the ACL config mode.
+
+Imortant: When configuring/editing numbered ACLs from global config mode, you can't delete individual entries, you can only delete the entire ACL! 
+
+If you try to delete a single entry with the following command, it will delete the entire ACL:
+```
+R1(config)# no access-list 1 deny 1.1.1.1 0.0.0.0
+R1(config)# do show access-lists
+R1(config)# do show running-config | section access-list
+```
+
+So if you want to edit ACLs, should definetely use named ACL config mode. If you want you can use global config mode to configure a numbered ACL and when you want to edit, just use named ACL config mode.
+
+- You can insert new entries in between other entries by specifying the sequence number.
+
+### Resequencintg ACLs
+- There is a resequencing function that helps edit ACLs.
+- The command ip access-list resequence acl-id starting-seq-num increment
+
+```
+# This command is done in global config mode, and it works for all the ACL types, standard and extended ACLs
+
+R1(config)# ip  access-list resequence 1 10 10
+```
+
 ### Extended ACLs
-Match based on Source/Destination IP, Source/Destination port, etc.
- - Extended Numbered ACLs
- - Extended Named ACLs
-# Practical Networking ACLs
+- Extended ACLs function mostly the same as standard ACLs
+- They can be numbred or name, just like standard ACLs
+    - Extended Numbered ACLs
+    - Extended Named ACLs
+- Numbered ACLs use the following ranges: 100-199, 2000-2699.
+- They are processed from top to bottom, just like standard ACLs
+- However, they can match traffic based on more parameters, so they are more precise (and more complex) than standard ACLs.
+- They can match based on Source/Destination IP, Source/Destination port, etc.
+
+To configured  extended numbered ACL:
+```
+R1(config)# access-list number [permit | deny] protocol src-ip dest-ip
+```
+
+To configure extended name ACL:
+```
+R1(config)# ip access-list  extended {name|number}
+R1(config-ext-nacl)# [seq-num] [permit | deny] protocol src-ip dest-ip
+```
+
+Important: In extended ACLs, to specify a /32 source or destination you have to use the host option or specify the wildcard-mask. You can't just write the adddress without either of those. But remember in standard ACLs we can ommit either of those.
+
+> tcp protocol, tells the router to deny all packets that encapsulate a TCP segment, from any source, to destination specified (10.0.0.0/24)
+
+### Matching the TCP/UDP port numbers
+- When matching tcp/udp, you can optionally specify the source and/or detination port numbers to match.
+```
+R1(config-ext-nacl)# deny tcp src-ip eq src-port-num dest-ip eq dst-port-num
+```
+- eq  80 = equal to port 80
+- gt  80 = greater than port 80 (81 and greater)
+- lt  80 = less than port 80 (79 and less)
+- neq 80 = NOT 80
+- range 80 100 = from port 80 to port 100
+
+After the destination ip address  and/or destination port numbers, there are many more options you can use to match (not necessary for the CCNA):
+- ack: match the TCP ACK flag
+- fin: match the TCP FIN flag
+- syn: match the TCP SYN flag
+- ttl: match packets with a specific TTL value
+- dscp: match packets with a specific Diferentiated Service Code Point (DSCP) value  in the IPv4 header
+
+If you specify the protocol, source IP, source port, destination IP, destination port, etc, a packet must match ALL of those values to match the ACL entry. Even if it matches all exept one the parameters, the packet won't match that entry in the ACL.
+
+Important: Extented ACLs should be applied as close the source as possible, to limit how the packets travel in the network before being denined.
+(Standard ACLs are less specific, so they are applied close to the source there is a rist of blocking more traffic than intended.)
+
+Show ACLs applied to an interface:
+```
+R1# show ip interface g0/0
+```
