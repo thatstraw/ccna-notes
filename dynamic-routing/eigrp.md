@@ -1,4 +1,5 @@
-# Enhanced Interior Routing Protocol
+# Enhanced Interior Routing Protocol notes
+
 EIGRP send multicast messages via 224.0.0.10
 
 
