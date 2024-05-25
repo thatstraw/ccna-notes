@@ -123,3 +123,26 @@ R1(config)# lldp holdtime <seconds>
 ```
 R1(config)# lldp reinit <seconds>
 ```
+
+
+## LLDP basic Commands
+```
+# show basic information about lldp (timers, version)
+R1# show lldp
+
+# displays how may lldb messages/frames have been sent and recieved
+R1# show lldp traffic
+
+# displays whether transmit or recieve are enable/disabled on each interface
+R1# show lldp interface
+
+# Lists llbp neighbours and some basic information about each neighbor
+R1# show lldp neighbors 
+
+# Lists each lldp neighbor with more detailed information
+R1# show lldp neighbors detail
+
+# The output of the above command can get quite long with more devices
+# Displays the same info as above command, but for the specifed neighbor only
+R1# show lldp entry R2
+```
