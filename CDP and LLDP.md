@@ -41,3 +41,85 @@ R1# show cdp entry R2
 
 ### CDP configuration commands
 - CDP is globally enabled by default.
+- CDP is also enabled on each interface by default
+
+To disable CDP globally:
+```
+R1(config)# no cdp run
+```
+
+To enable CDP globally:
+```
+R1(config)# cdp run
+```
+
+To enable/disable CDP on specific interfaces:
+```
+R1(config-if)# [no] cdp enable
+```
+
+Configure the CDP timer:
+```
+R1(config)# cdp timer <seconds>
+```
+
+Configure the CDP holdtime:
+```
+R1(config)# cdp holdtime <seconds>
+```
+
+Enable/Disable CDPv2:
+```
+R1(config)# [no] cdp advertise-v2
+```
+
+## Link Layer Discovery Protocol
+- LLDP is an industry standard protocol (IEEE 802.1AB)
+- It is usually disabled on Cisco devices by default, so it must be manually enabled.
+- A device can run CDP and LLDP at the same time.
+- LLDP messages are periodically sent to multicat address 0180.C200.000E
+- When a device recieves an LLDP message, it processes and discards the message. It does NOT forward it to other devices. So, only directly connected devices can become LLDP neighbors
+- By default, LLDP messages are sent once every 30 seconds, this is half the time of CDP default 60 seconds.
+- By default, the LLDP holdtime is 120 seconds
+- LLDP has an additinal timer called the 'reinitialization delay'. If LLDP is enabled (globally or on an interface), this timer will delay the actual initialization of LLDP. 2 seconds by default
+
+### LDP configuration commands
+- LLDP is ussually globally disabled by default
+- LLDP is also dissabled on each interface by default
+
+- To enable LLDP globally:
+```
+R1(config)# lldp run
+```
+
+- To disable LLDP globally:
+```
+R1(config)# no lldp run
+```
+Notice, this is just the same as CDP, just replace the word cdp with LLDP
+
+- To enable LLDP on specific interfaces in the trasmission direction (tx):
+```
+R1(config-if)# lldp transmit
+```
+
+This causes the interface to start senting LLDP messages, however it won't recieve messages.
+- To enable LLDP on a specific interface in the recieve direction (rx):
+```
+R1(config-if)# lldp receive
+```
+
+- Configure the LLDP timer:
+```
+R1(config)# lldp timer <seconds>
+```
+
+- Configure the LLDP holdtime
+```
+R1(config)# lldp holdtime <seconds>
+```
+
+- Configure the LLDP reinit timer
+```
+R1(config)# lldp reinit <seconds>
+```
