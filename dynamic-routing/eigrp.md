@@ -1,7 +1,7 @@
 # Enhanced Interior Routing Protocol
 EIGRP send multicast messages via 224.0.0.10
 
-## Configuring EIGRP
+## Configuring EIGRP 
 ```
 
 # The AS (Autonomous System) number must match between the routers, or they will form an adnacency and share routing information
@@ -93,3 +93,4 @@ R1(config-router)# network 0.0.0.0 255.255.255.255
 ```
 metric = bandwidth of the slowest link + the delay of all links
 ```
+Thanks
