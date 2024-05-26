@@ -50,3 +50,34 @@ R1(config)# clock summer-time ?
 ```
 
 ## Network Time Protocol
+- Manually configuring the time on devices in not scalable.
+- The manually configured clock will drift, resulting in inaccurate time.
+- NTP (Network Time Protocol) allows automatic syncing of time over a network.
+- NTP clients request the time from NTP servers then they synchronize their time with the time of the server.
+- A device can be an NTP server and an NTP client at the same time. It will sync it's time to a server and other devices will sync to it. 
+- NTP allows accuracy of time within ~1 millisecond if the NTP server is in the same LAN, or within ~50 milliseconds if connecting to the NTP server over a wan/internet.
+- Some NTP servers are better than others. The distance of an NTP server from the original reference clock is called stratum. The further away from the reference clock the higher the stratum.
+- If the stratum level of a server is high it is considered less accurate. 
+- NTP uses UDP port 123 to communicate.
+
+## Reference Clocks
+- A reference clock is usually a very accurate time device like an atomic clock or a GPS clock.
+- Reference clocks are stratum 0 within the NTP hierarchy. They are as close to the time source as possible, becuase they are the time source.
+- NTP servers directly connected to a reference clocks are stratum 1.
+
+---------------NTP Hierarchy Image-------------------------------
+
+- Rerence clocks are stratum 0.
+- Stratum 1 NTP servers get their time from reference clocks. 
+- Stratum 2 NTP servers get their time from  Stratum 1 NTP servers.
+- Stratum 3 NTP servers get their time from  Stratum 2 NTP servers.
+- Stratum 15 is the maximum. Anything above that is considered unreliable.
+- Devices can also peer with devices at the same stratum  to provide more accurate time. This is called symmetric active mode. Cisco devices can operate in three NTP modes:
+    - Server mode
+    - Client mode
+    - Symmetric active mode
+They can be in all of those three modes at the same time too.
+- An NTP client can sync to multiple NTP servers.
+
+> NTP servers which get their time directly from reference clocks are also called primary servers
+> NTP servers which get their time from other NTP servers are called secondary servers. They operate in server mode and client mode at the same time.
