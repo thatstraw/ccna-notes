@@ -121,4 +121,65 @@ R1(config-if)# exit
 
 # Configure R1 interface to be used as the source of NTP messages.
 R1(config)# ntp source loopback0
+
+
+R2(config)# ntp server <R1 loopback IP>
+```
+
+## Configuring NTP server mode
+Configure a device to operate as NTP server even though it isn't synced to another NTP server:
+```
+R1(config)# ntp master
+```
+The default stratum of the `ntp master` command is 8.
+
+## Configuring NTP Symetric active mode
+Configuring ymetric active mode between R2 and R3
+
+```
+R2(config)# ntp peer  <R3 IP Address>
+R3(config)# ntp peer  <R2 IP Address>
+```
+
+## NTP Authentication
+- NTP authentication can be configured, aulthough it is optional
+- It allows NTP clients to ensure they only sync to the intended servers
+- To configure NTP authentication:
+
+```
+# enable NTP authentication
+npt authenticate
+
+# create the NTP authentication key(s)
+ntp authentication-key <key-number> md5 <key/password-itself>
+
+# specify the trusted key(s)
+ntp trusted-key <key-number>
+
+# specify which key to use for each server
+ntp server <ip-address> key <key-number>
+
+# The above command isn't need on the server itself (R1) .
+
+```
+
+Actual Configuration
+```
+R1(config)# ntp authenticate
+R1(config)# ntp authentication-key 1 md5 ciscolabs
+R1(config)# ntp trusted-key 1
+
+
+R2(config)# ntp authenticate
+R2(config)# ntp authentication-key 1 md5 ciscolabs
+R2(config)# ntp trusted-key 1
+R2(config)# ntp server <R1 IP Address> key 1
+R2(config)# ntp peer <R3 IP address> key 1
+
+R3(config)# ntp authenticate
+R3(config)# ntp authentication-key 1 md5 ciscolabs
+R3(config)# ntp trusted-key 1
+R3(config)# ntp server <R1 IP Address> key 1
+R3(config)# ntp peer <R2 IP address> key 1
+
 ```
