@@ -81,3 +81,44 @@ They can be in all of those three modes at the same time too.
 
 > NTP servers which get their time directly from reference clocks are also called primary servers
 > NTP servers which get their time from other NTP servers are called secondary servers. They operate in server mode and client mode at the same time.
+
+## Configuring NTP
+
+```
+# prefer can be used to make the device prefer the specified ntp server.
+R1(config)# ntp server <server-ip> prefer
+R1(config)# ntp server <server-ip>
+```
+
+Show configured NTP servers
+```
+R1# show ntp associations
+```
+
+Show Configured NTP server status
+```
+R1# show ntp status
+```
+
+Note: NTP uses only the UTC time zone. You must configure the appropriate time zone on each device.
+
+```
+R1(config)# clock timezone JST 9
+```
+
+NTP doesn't update the calender, only update the clock (software time), so we need to make ntp update the calender:
+```
+R1(config)# ntp update-calender
+```
+
+You might be wondering why you would want to sync the hardware clock (calender). The hardware clock tracks the date and time on the divece even if it restarts, power is lost etc. When the system is restarted, the hardware clock is used to initialize the software clock.
+
+Configuring R2 to use R1 as the NTP server
+```
+R1(config)# interface loopback 0
+R1(config-if)# ip address 10.1.1.1 255.255.255.255
+R1(config-if)# exit
+
+# Configure R1 interface to be used as the source of NTP messages.
+R1(config)# ntp source loopback0
+```
