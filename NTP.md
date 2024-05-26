@@ -129,7 +129,7 @@ R2(config)# ntp server <R1 loopback IP>
 ## Configuring NTP server mode
 Configure a device to operate as NTP server even though it isn't synced to another NTP server:
 ```
-R1(config)# ntp master
+R1(config)# ntp master ?
 ```
 The default stratum of the `ntp master` command is 8.
 
