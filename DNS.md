@@ -51,3 +51,29 @@ R1(config)# ip name-server 8.8.8.8
 # Enable R1 to perform DNS queries (enabled by default) (old version of the command is ip domain-lookup)
 R1(config)# ip domain lookup
 ```
+
+To view the hosts configured and the ones cached use:
+```
+R1# show hosts
+```
+
+Optional: configure the default domain name
+```
+R1(config)# ip domain name cisco.com
+
+# or old version
+R1(config)# ip domain-name cisco.com
+
+```
+This will be automatically appended to any hostnames without a specified domain.
+For example:
+
+```
+> ping pc1
+```
+Will become:
+```
+> ping pc1.cisco.com
+```
+
+
