@@ -28,7 +28,7 @@
 4. DHCP Ack: Okay, you may use it.
 
 ```
-Discover        Client -> Server       Broadcast
+Discover        Client -> Server    
 Offer           Server -> Client       Broadcast or Unicast
 Request         Client -> Server       Broadcast
 ACK             Server -> Client       Broadcast or Unicast
@@ -61,7 +61,7 @@ R1(dhcp-config)# dns-server 8.8.8.8
 R1(dhcp-config)# domain-name cisco.com
 
 # Specify the default gateway
-R1(dhcp-config)# 192.168.1.1
+R1(dhcp-config)# default-router 192.168.1.1
 
 # Specify the lease time.
 # lease days hours minutes or
