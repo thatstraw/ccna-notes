@@ -95,3 +95,7 @@ R2(config)# int g0/1
 R1(config-if)# ip address dhcp
 
 ```
+
+### another command
+show ip dhcp pool
+show ip dhcp server statics
