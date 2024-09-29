@@ -91,6 +91,24 @@ R1(config-if)# ip ospf 1 area 0
 ## Formulae to calculate ospf cost
 > reference bandwidth / interface bandwidth
 
+- Ospf metric is called cost
+- it is automatically calculated based on the bandwidth (speed) of the interface.
+- You can also manually configure the cost of each interface.
+- It is calculated by deviding the reference bandwidht value by the interface's bandwidth.
+- The default ospf reference bandwidth is 100mbs
+      **Reference**: 100mbs / **interface**: 10mbs = cost of 10
+      **Reference**: 100mbs / **interface**: 100mbs = cost of 1
+      **Reference**: 100mbs / **interface**: 1000mbs = cost of 1
+      **Reference**: 100mbs / **interface**: 10000mbs = cost of 1
+  In ospf all values less than 1 will be converted to 1
+  - Therefore fast ethernet, Gigabit ethernet, 10Gig Ethernet etc. are equal and all have the same cost of 1 by default.
+  - You can (and should) change the reference bandwidth with this command.
+  
+  ```
+  R2(config-router)# auto-cost reference-bandwidth <mega-bits-per-second>
+  ```
+  - You should configure the reference bandwidth greater than the fastest links in your network to allow for future upgrades.
+  - You should configure the same reference bandwidth all the ospf routers in your network.
 ## OSPF Neighbors
 
 - When OSPF is activated on an interface, the router starts sending ospf hello messages out the interface at regular interfals (determined by the hello timer). These are use to introduce the router to potential ospf enighbors.
