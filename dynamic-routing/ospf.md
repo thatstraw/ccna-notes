@@ -110,6 +110,16 @@ R1(config-if)# ip ospf 1 area 0
   ```
   - You should configure the reference bandwidth greater than the fastest links in your network to allow for future upgrades.
   - You should configure the same reference bandwidth all the ospf routers in your network.
+
+**One more option to change the OSPF cost of an interface is to change the bandwidth of the interface with the bandwidth command.**
+
+- The formula to calculate OSPF cost is **reference bandwidth / interface bandwidth**.
+- Although the bandwidth matches the interface speed by default, changing the interface bandwidth **doesn’t actually change the speed at which the interface operates.**
+- The bandwidth is just a value that is used to calculate OSPF cost, EIGRP metric, etc.
+- To change the speed at which the interface operates, use the **speed** command.
+- Because the bandwidth value is used in other calculations, it is not recommended to change this value to alter the interface’s OSPF cost.
+- It is recommended that you change the **reference bandwidth**, and then use the **ip ospf cost** command to change the cost of individual interfaces if you want.
+
 ## OSPF Neighbors
 
 - When OSPF is activated on an interface, the router starts sending ospf hello messages out the interface at regular interfals (determined by the hello timer). These are use to introduce the router to potential ospf enighbors.
