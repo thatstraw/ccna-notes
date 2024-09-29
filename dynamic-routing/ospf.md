@@ -127,10 +127,12 @@ R1(config-if)# bandwidth ?
 
 ## OSPF Neighbors
 
+- Making sure that routers successfully become OSPF neighbors is the main task in configuring and troubleshooting OSPF.
+- Once routers become neighbors, they automatically do the work of sharing network information, calculating routes, etc.
 - When OSPF is activated on an interface, the router starts sending ospf hello messages out the interface at regular interfals (determined by the hello timer). These are use to introduce the router to potential ospf enighbors.
 - The default hello timer is 10 seconds on an ethernet connection.
 - Hello messages are multicast to 224.0.0.5 (multicast address for all ospf routers)
-- OSPF messages are encapsulated in an IP header, with the value of 89 in the protocol field.
+- OSPF messages are encapsulated in an IP header, with the value of 89 in the protocol field to indicate ospf
 
 
 ##  ospf neighbor state
