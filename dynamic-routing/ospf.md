@@ -78,6 +78,7 @@ R1(config-router)# auto-cost reference-bandwidth <megabits-per-second>
 
 
 # Manually configuring ospf cost of an interface
+# This cost will take priority over the auto calculated cost.
 R1(config-if)# ip ospf cost ?
 
 
@@ -103,7 +104,7 @@ R1(config-if)# ip ospf 1 area 0
   In ospf all values less than 1 will be converted to 1
   - Therefore fast ethernet, Gigabit ethernet, 10Gig Ethernet etc. are equal and all have the same cost of 1 by default.
   - You can (and should) change the reference bandwidth with this command.
-  
+ - loopback interfaces have a cost of 1 
   ```
   R2(config-router)# auto-cost reference-bandwidth <mega-bits-per-second>
   ```
