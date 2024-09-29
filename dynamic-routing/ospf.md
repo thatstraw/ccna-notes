@@ -138,7 +138,20 @@ R1(config-router)# no passive-interface g0/0
 # Change OSPF inteface priority
 R2(config-if)# ip ospf priority ?
 
+
 ```
+
+## Configuring loopback address on a router
+```
+Router> enable
+Router# configure terminal
+Router(config)# interface loopback 0
+Router(config-if)# ip address 192.168.1.1 255.255.255.0
+Router(config-if)# no shutdown
+```
+
+Here, 0 is the interface number. You can create multiple loopback interfaces by incrementing the number (e.g., loopback 1, loopback 2, etc.).
+
 
 ## Ospf network types
 The ospf network type refers to the type of connection between ospf neighbors (Ethernet, etc)
