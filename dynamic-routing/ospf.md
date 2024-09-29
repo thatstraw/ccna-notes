@@ -120,6 +120,11 @@ R1(config-if)# ip ospf 1 area 0
 - Because the bandwidth value is used in other calculations, it is not recommended to change this value to alter the interface’s OSPF cost.
 - It is recommended that you change the **reference bandwidth**, and then use the **ip ospf cost** command to change the cost of individual interfaces if you want.
 
+```
+# to change the interface bandwidth
+R1(config-if)# bandwidth ? 
+```
+
 ## OSPF Neighbors
 
 - When OSPF is activated on an interface, the router starts sending ospf hello messages out the interface at regular interfals (determined by the hello timer). These are use to introduce the router to potential ospf enighbors.
