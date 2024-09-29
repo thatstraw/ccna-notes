@@ -31,7 +31,7 @@
 ## Configuring ospf
 ```
 R1(config)# router ospf ?
-R1(config-router)# network <netword-address> <bitwise mask> <area>
+R1(config-router)# network <netword-address> <bitwise mask> area <area>
 
 # always use this command on interfaces which don't have any ospf neigbours
 R1(config-router)# passive-interface g0/2
